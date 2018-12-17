@@ -1,13 +1,11 @@
 package br.com.jonjts.myprofit
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import br.com.jonjts.myprofit.R.menu.navigation
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,30 +20,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                selected(fragments[0])
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_search -> {
+                //message.setText(R.string.title_dashboard)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_itens -> {
+                //message.setText(R.string.title_notifications)
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(bottombar)
         initFragmentsList()
-
-        fab_add_item.setOnClickListener {
-            startActivity(Intent(this, ProfitActivity::class.java))
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            R.id.navigation_home -> selected(fragments[0])
-        }
-
-        return true
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.navigation, menu)
-        return true
+        navegation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
     fun initFragmentsList(){
