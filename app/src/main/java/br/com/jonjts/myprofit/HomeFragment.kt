@@ -3,10 +3,15 @@ package br.com.jonjts.myprofit
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.bottom_sheet.*
+import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.bottom_sheet.view.*
+import kotlinx.android.synthetic.main.filter.view.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,8 +33,24 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+        val state: View = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val bottomSheetBehavior = BottomSheetBehavior.from(state.bottom_sheet)
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+
+        state.btn_filter.setOnClickListener {
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN){
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+            }else{
+                bottomSheetBehavior.setPeekHeight(300);
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
+            }
+        }
+
+
+        return state
     }
 
 

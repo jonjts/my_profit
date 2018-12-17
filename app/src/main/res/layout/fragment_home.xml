@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+>
 
-    <!-- Scrollable view here -->
 
-    <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar_home"
-            android:fitsSystemWindows="true"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-                app:title="@string/title_home"
-                android:fitsSystemWindows="true"
+
+        <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="@android:color/white"
-                android:background="@android:color/white"
-                app:expandedTitleGravity="center"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-
-
-            <androidx.appcompat.widget.Toolbar
-                    app:title="home"
-                    android:background="@android:color/white"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"/>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+                    android:layout_height="wrap_content">
 
+                <include layout="@layout/filter"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/fragment_header" android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+        <include layout="@layout/bottom_sheet" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

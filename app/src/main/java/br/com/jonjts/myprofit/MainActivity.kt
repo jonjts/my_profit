@@ -1,19 +1,24 @@
 package br.com.jonjts.myprofit
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.com.jonjts.myprofit.R.menu.navigation
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.bottom_sheet.*
+
 
 class MainActivity : AppCompatActivity() {
 
     var fragments = mutableListOf<Fragment>()
-    val  fm = getSupportFragmentManager()
+    val fm = getSupportFragmentManager()
 
-    fun selected(f: Fragment){
-        if(!f.isVisible) {
+    fun selected(f: Fragment) {
+        if (!f.isVisible) {
             val ft = fm.beginTransaction()
             ft.add(R.id.container, f)
             ft.commit()
@@ -44,9 +49,10 @@ class MainActivity : AppCompatActivity() {
 
         initFragmentsList()
         navegation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
     }
 
-    fun initFragmentsList(){
+    fun initFragmentsList() {
         fragments.add(HomeFragment.newInstance())
         selected(fragments[0])
     }

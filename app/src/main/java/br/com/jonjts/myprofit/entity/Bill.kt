@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity
-data class Profit(
+data class Bill(
     @PrimaryKey var id: Long,
     @ColumnInfo var nome: String,
     @ColumnInfo var saida: Double,
