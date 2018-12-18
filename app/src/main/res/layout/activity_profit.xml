@@ -41,9 +41,12 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColorHint="@android:color/white"
                         android:hint="Nome/Descrição">
 
                     <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_descricao"
+                            android:textColorHint="@android:color/white"
                             android:textSize="29dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -76,6 +79,8 @@
                         android:hint="Entrada">
 
                     <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_entrada"
+                            android:textColor="@color/colorPrimary"
                             android:inputType="numberDecimal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -91,6 +96,8 @@
                         android:hint="Saída">
 
                     <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_saida"
+                            android:textColor="@color/colorPrimary"
                             android:inputType="numberDecimal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -112,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:clickable="true"
                         app:srcCompat="@drawable/ic_done_white_24dp"
-                        android:id="@+id/floatingActionButton2"/>
+                        android:id="@+id/btn_save"/>
 
 
             </LinearLayout>

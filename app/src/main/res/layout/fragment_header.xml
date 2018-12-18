@@ -9,7 +9,6 @@
             android:layout_height="180dp" app:expanded="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-                app:contentScrim="@android:color/white"
                 app:titleEnabled="true"
                 app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
                 android:fitsSystemWindows="true"
