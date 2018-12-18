@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.filter.view.*
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.widget.Toolbar
+import kotlinx.android.synthetic.main.activity_profit.*
+import kotlinx.android.synthetic.main.activity_profit.view.*
 import kotlinx.android.synthetic.main.fragment_header.view.*
 import java.util.*
 
@@ -27,6 +30,7 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : androidx.fragment.app.Fragment() {
 
     var calendar = Calendar.getInstance()
+    var toolBar: Toolbar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +38,9 @@ class HomeFragment : androidx.fragment.app.Fragment() {
     ): View? {
 
         val myView: View = inflater.inflate(R.layout.fragment_home, container, false)
-        myView.btn_filter.setOnClickListener {
-
-        }
-
+        toolBar = myView!!.toolbar_header
         initSpinners(myView)
+
 
         return myView
     }
@@ -56,9 +58,21 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         )
 
         adapter_years.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        var spinnerAno = view.spinner_ano
         view.spinner_ano.adapter = adapter_years
 
         view.spinner_ano.setSelection(currentYearPositionInSpinner())
+
+        view.spinner_ano.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                toolBar!!.subtitle = spinnerAno.selectedItem.toString()
+            }
+
+        }
     }
 
     fun currentYearPositionInSpinner() : Int{
@@ -71,7 +85,6 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         }
         return 0
     }
-
 
 
      fun initSpinnerMonth(view: View){

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#d81b60</color>
+    <color name="colorPrimary">#ff3a6b74</color>
+    <color name="colorPrimaryDark">#37646e</color>
+    <color name="colorAccent">#ff599ea8</color>
+
+    <color name="entrada_cold">#7a386771</color>
+    <color name="entrada">#ff599ea8</color>
+    <color name="entrada_dark">#ff3a6b74</color>
+    <color name="entrada_dark_extra">#37646e</color>
+    <color name="saida">#F1696B</color>
+    <color name="lucro">#ff91c3a1</color>
+    <color name="lucro_negativo">#CC93AD</color>
 </resources>

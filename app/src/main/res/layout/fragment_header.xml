@@ -6,16 +6,17 @@
             android:id="@+id/appbar_home"
             android:fitsSystemWindows="true"
             android:layout_width="match_parent"
-            android:layout_height="150dp" app:expanded="true">
+            android:layout_height="180dp" app:expanded="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+                app:contentScrim="@android:color/white"
                 app:titleEnabled="true"
+                app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
                 android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
-                app:expandedTitleGravity="center_horizontal"
-                app:layout_scrollFlags="exitUntilCollapsed">
+                app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
 
 
             <LinearLayout
@@ -24,7 +25,6 @@
                     android:layout_height="match_parent" android:gravity="center_vertical|center_horizontal">
                 <Spinner
                         android:minWidth="30dp"
-
                         android:gravity="center"
                         android:textAlignment="center"
                         android:layout_width="wrap_content"
@@ -38,6 +38,7 @@
                         android:id="@+id/spinner_ano" android:popupBackground="@color/colorPrimary"/>
             </LinearLayout>
             <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar_header"
                     app:title="Dezembro"
                     app:subtitle="2018"
                     app:subtitleTextColor="@android:color/white"
@@ -45,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseParallaxMultiplier="0.9" app:layout_collapseMode="pin"
-                    android:visibility="gone"/>
+                    android:visibility="visible"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

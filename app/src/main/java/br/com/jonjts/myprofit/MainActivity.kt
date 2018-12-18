@@ -1,5 +1,6 @@
 package br.com.jonjts.myprofit
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -59,6 +61,10 @@ class MainActivity : AppCompatActivity() {
             val decorView = window.decorView
             decorView.systemUiVisibility = FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS or SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         }
+    }
+
+    fun onAddBillClicked(v: View){
+        startActivity(Intent(this, ProfitActivity::class.java))
     }
 
     fun initFragmentsList() {

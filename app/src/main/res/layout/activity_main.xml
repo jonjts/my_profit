@@ -21,17 +21,21 @@
             android:layout_marginBottom="80dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:src="@drawable/ic_add_white"
+            app:srcCompat="@drawable/ic_add_white"
+            app:maxImageSize="15dp"
             android:layout_marginEnd="16dp"
             android:clickable="true"
-            android:focusable="true" app:backgroundTint="@color/colorPrimary"/>
+            android:focusable="true"
+            android:onClick="onAddBillClicked"
+            app:backgroundTint="@color/colorPrimary"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navegation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:menu="@menu/navigation" style="@style/Widget.MaterialComponents.BottomNavigationView"/>
+            app:menu="@menu/navigation"
+            style="@style/Widget.MaterialComponents.BottomNavigationView"/>
 
 </FrameLayout>
 
