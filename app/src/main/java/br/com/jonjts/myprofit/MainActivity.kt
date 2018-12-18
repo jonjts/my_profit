@@ -10,6 +10,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.bottom_sheet.*
+import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+import android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
+import android.os.Build
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +55,10 @@ class MainActivity : AppCompatActivity() {
         initFragmentsList()
         navegation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val decorView = window.decorView
+            decorView.systemUiVisibility = FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS or SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        }
     }
 
     fun initFragmentsList() {

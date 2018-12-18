@@ -5,10 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingRight="4dp"
-        android:paddingLeft="4dp"
->
+        android:orientation="vertical">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -21,6 +18,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
+                android:paddingRight="4dp"
+                android:paddingLeft="4dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <LinearLayout
                     android:orientation="vertical"
@@ -34,6 +33,5 @@
 
         <include layout="@layout/fragment_header" android:layout_width="match_parent"
                  android:layout_height="wrap_content"/>
-        <include layout="@layout/bottom_sheet" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

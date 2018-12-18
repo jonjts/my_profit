@@ -6,25 +6,46 @@
             android:id="@+id/appbar_home"
             android:fitsSystemWindows="true"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="150dp" app:expanded="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-                app:title="@string/title_home"
+                app:titleEnabled="true"
                 android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="@android:color/white"
-                android:background="@android:color/white"
-                app:expandedTitleGravity="center"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                android:background="@color/colorPrimary"
+                app:expandedTitleGravity="center_horizontal"
+                app:layout_scrollFlags="exitUntilCollapsed">
 
 
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:gravity="center_vertical|center_horizontal">
+                <Spinner
+                        android:minWidth="30dp"
+
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner_mes"
+                        style="@android:style/Widget.Material.Spinner" android:popupBackground="@color/colorPrimary"
+                        android:dropDownWidth="match_parent"/>
+                <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner_ano" android:popupBackground="@color/colorPrimary"/>
+            </LinearLayout>
             <androidx.appcompat.widget.Toolbar
-                    app:title="home"
-                    android:background="@android:color/white"
+                    app:title="Dezembro"
+                    app:subtitle="2018"
+                    app:subtitleTextColor="@android:color/white"
+                    android:background="@color/colorPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"/>
+                    app:layout_collapseParallaxMultiplier="0.9" app:layout_collapseMode="pin"
+                    android:visibility="gone"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
