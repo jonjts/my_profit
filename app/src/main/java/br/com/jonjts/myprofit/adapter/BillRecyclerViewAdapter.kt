@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.jonjts.myprofit.R
+import br.com.jonjts.myprofit.callback.BillListCallback
 import br.com.jonjts.myprofit.dummy.DummyContent.DummyItem
 import br.com.jonjts.myprofit.entity.Bill
 import br.com.jonjts.myprofit.util.Util
@@ -19,7 +20,8 @@ import kotlinx.android.synthetic.main.fragment_bill.view.*
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class BillRecyclerViewAdapter(val mValues: List<Bill>) :
+class BillRecyclerViewAdapter(val mValues: List<Bill>,
+                              val callback: BillListCallback) :
     RecyclerView.Adapter<BillRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
@@ -27,14 +29,15 @@ class BillRecyclerViewAdapter(val mValues: List<Bill>) :
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as Bill
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
+            callback?.onBillClicked(item)
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_bill, parent, false)
+
         return ViewHolder(view)
     }
 
@@ -84,6 +87,10 @@ class BillRecyclerViewAdapter(val mValues: List<Bill>) :
 
         val mPanelEntrada: LinearLayout = mView.linear_entrada
         val mPanelSaida: LinearLayout = mView.linear_saida
+
+        fun setOnClickListener(listener : View.OnClickListener){
+            mView.setOnClickListener(listener)
+        }
 
         override fun toString(): String {
             return super.toString() + " '" + mDataRegistro.text + "'"

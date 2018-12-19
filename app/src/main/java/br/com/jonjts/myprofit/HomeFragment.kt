@@ -29,6 +29,11 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : BaseFragment() {
 
+
+    override fun reload() {
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

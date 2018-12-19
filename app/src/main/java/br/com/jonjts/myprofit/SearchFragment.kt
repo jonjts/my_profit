@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import br.com.jonjts.myprofit.callback.DatabaseCallback
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -14,8 +15,11 @@ import androidx.fragment.app.Fragment
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), DatabaseCallback {
 
+    override fun onDataChange() {
+
+    }
 
 
     override fun onCreateView(

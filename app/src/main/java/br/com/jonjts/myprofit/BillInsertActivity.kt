@@ -1,5 +1,6 @@
 package br.com.jonjts.myprofit
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -15,6 +16,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import br.com.jonjts.myprofit.entity.Bill
+import com.facebook.stetho.common.Util
 import kotlinx.android.synthetic.main.activity_profit.*
 import java.text.NumberFormat
 import java.util.*
@@ -57,7 +59,7 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
         updateDate(year, month, dayOfMonth)
     }
 
-    private fun updateDate(d: Date) {
+    fun updateDate(d: Date) {
         calendar.time = d
         updateDateButton()
     }
@@ -69,17 +71,16 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
         updateDateButton()
     }
 
-    private fun updateDateButton(){
+    private fun updateDateButton() {
         val convert = br.com.jonjts.myprofit.util.Util.convert(calendar.time)
         btn_dataregistro.text = convert
     }
 
-    fun onSaveClicked(v: View) {
+    open fun onSaveClicked(v: View) {
         if (isValid()) {
-            if (isNewItem()) {
-                insert()
-                Toast.makeText(this, getText(R.string.success_insert), Toast.LENGTH_LONG).show()
-            }
+            insert()
+            setResult(Activity.RESULT_OK)
+            Toast.makeText(this, getText(R.string.success_insert), Toast.LENGTH_LONG).show()
             finish()
         }
     }
@@ -88,11 +89,13 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
         App.database?.billDao()?.insert(bind())
     }
 
-    private fun bind(): Bill {
-        val bill = Bill(null, txt_descricao.text.toString(),
+    open fun bind(): Bill {
+        val bill = Bill(
+            null, txt_descricao.text.toString(),
             convert(txt_saida.text.toString()),
             convert(txt_entrada.text.toString()),
-            calendar.time)
+            calendar.time
+        )
         return bill
     }
 
@@ -108,11 +111,7 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
     }
 
 
-    private fun isNewItem(): Boolean {
-        return true
-    }
-
-    private fun isValid(): Boolean {
+    fun isValid(): Boolean {
         if (txt_descricao.text.isNullOrBlank()) {
             txt_descricao.error = getString(R.string.required_field)
             return false
@@ -191,9 +190,4 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.navigation_profit, menu)
-        return true
-    }
 }

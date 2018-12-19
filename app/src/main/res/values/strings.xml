@@ -43,14 +43,20 @@
 
     <string name="success_insert">Successfuly</string>
     <string name="success_update">Successfuly</string>
+    <string name="success_remove">Removed</string>
+
 
     <string name="required_field">Required field</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="title_salvar">Save</string>
-    <string name="title_delete">Delete</string>
+    <string name="title_delete">Remove</string>
 
     <string name="hint_descricao">Name/Description</string>
-    <string name="title_new_profit">New Item</string>
+    <string name="title_update">Update</string>
+    <string name="title_new_profit">New</string>
     <string name="hint_entrada">Input</string>
     <string name="hint_saida">Output</string>
 </resources>

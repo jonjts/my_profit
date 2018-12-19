@@ -7,17 +7,28 @@ import android.widget.Spinner
 import androidx.appcompat.view.CollapsibleActionView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import br.com.jonjts.myprofit.callback.DatabaseCallback
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import kotlinx.android.synthetic.main.fragment_header.*
 import kotlinx.android.synthetic.main.fragment_header.view.*
 import java.util.*
 
-open class BaseFragment : Fragment(){
+open abstract class BaseFragment : Fragment(), DatabaseCallback{
+
 
     var calendar = Calendar.getInstance()
     var toolBar: CollapsingToolbarLayout? = null
+    var spinnerAno: Spinner? = null
+    var spinnerMes: Spinner? = null
+
+    override fun onDataChange() {
+        reload()
+    }
+
+    open abstract fun reload()
 
 
-    fun init(v: View){
+    open fun init(v: View){
         toolBar = v!!.collaps_toolbar
         initSpinners(v)
     }
@@ -35,30 +46,24 @@ open class BaseFragment : Fragment(){
         )
 
         adapter_years.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        var spinnerAno = view.spinner_ano
-        spinnerAno.adapter = adapter_years
+        spinnerAno = view.spinner_ano
+        spinnerAno?.adapter = adapter_years
 
+        spinnerAno?.setSelection(currentYearPositionInSpinner())
+    }
 
-        spinnerAno.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+    fun getSelectedMes(): Int{
+        return spinnerMes!!.selectedItemPosition + 1
+    }
 
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                onAnoSelected(spinnerAno)
-            }
-        }
-
-        spinnerAno.setSelection(currentYearPositionInSpinner())
+    fun getSelectedAno(): Int{
+        return spinnerAno?.selectedItem.toString().toInt()
     }
 
     protected fun onMesSelected(spn: Spinner){
         toolBar!!.title = spn.selectedItem.toString()
     }
 
-    protected fun onAnoSelected(spn: Spinner){
-
-    }
 
     fun currentYearPositionInSpinner() : Int{
         val years = resources.getStringArray(R.array.years)
@@ -80,10 +85,10 @@ open class BaseFragment : Fragment(){
         )
 
         adapter_months.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        val spinner_mes = view.spinner_mes
-        spinner_mes.adapter = adapter_months
+        spinnerMes = view.spinner_mes
+        spinnerMes?.adapter = adapter_months
 
-        spinner_mes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinnerMes?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
@@ -92,7 +97,7 @@ open class BaseFragment : Fragment(){
                 onMesSelected(spinner_mes)
             }
         }
-        spinner_mes.setSelection(calendar.get(Calendar.MONTH))
+        spinnerMes?.setSelection(calendar.get(Calendar.MONTH))
 
     }
 }

@@ -1,5 +1,6 @@
 package br.com.jonjts.myprofit
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.room.Database
+import br.com.jonjts.myprofit.callback.DatabaseCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,6 +19,10 @@ class MainActivity : AppCompatActivity() {
 
     var fragments = mutableListOf<Fragment>()
     val fm = getSupportFragmentManager()
+
+    companion object {
+        val openBillActivity = 1891
+    }
 
     fun selected(f: Fragment) {
         if (!f.isVisible) {
@@ -61,7 +68,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onAddBillClicked(v: View){
-        startActivity(Intent(this, BillInsertActivity::class.java))
+        startActivityForResult(Intent(this, BillInsertActivity::class.java), openBillActivity)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == openBillActivity && resultCode == Activity.RESULT_OK){
+            reloadFragments()
+        }
+    }
+
+    private fun reloadFragments(){
+        for (f in fragments) (f as DatabaseCallback).onDataChange()
     }
 
     fun initFragmentsList() {
@@ -69,6 +87,5 @@ class MainActivity : AppCompatActivity() {
         fragments.add(SearchFragment.newInstance())
         fragments.add(BillsFragment.newInstance())
         selected(fragments[0])
-
     }
 }

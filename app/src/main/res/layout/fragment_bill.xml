@@ -5,10 +5,11 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:background="?android:attr/selectableItemBackground">
+        android:background="@android:color/white">
 
     <!-- the circular icon on the left -->
     <TextView
+            android:textColor="@android:color/darker_gray"
             android:id="@+id/lbl_dataregistro"
             android:text="22/10/2019"
             android:layout_width="wrap_content"
@@ -51,8 +52,9 @@
                 android:text="Roupas da Riachuello"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lbl_title" android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textSize="25sp"/>
+                android:id="@+id/lbl_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textSize="25sp" android:textColor="@android:color/darker_gray"/>
 
         <LinearLayout
                 android:orientation="vertical"
@@ -66,6 +68,7 @@
                     android:layout_height="match_parent">
                 <TextView
                         android:paddingRight="4dp"
+                        android:textColor="@android:color/darker_gray"
                         android:text="@string/hint_entrada"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -84,6 +87,7 @@
                     android:layout_height="match_parent">
                 <TextView
                         android:paddingRight="4dp"
+                        android:textColor="@android:color/darker_gray"
                         android:text="@string/hint_saida"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>

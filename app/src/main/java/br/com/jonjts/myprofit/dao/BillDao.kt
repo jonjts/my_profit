@@ -15,7 +15,7 @@ interface BillDao{
     @Delete
     fun delete(bill: Bill)
 
-    @Query("SELECT * FROM bill WHERE strftime('%m', data_registro) = :month AND strftime('%y', data_registro) = :year")
+    @Query("SELECT * FROM bill WHERE strftime('%m', data_registro) = :month AND strftime('%Y', data_registro) = :year ORDER BY data_registro")
     fun consultByMonthYear(month: Int, year: Int) : List<Bill>
 
 

@@ -1,11 +1,16 @@
 package br.com.jonjts.myprofit
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.com.jonjts.myprofit.adapter.BillRecyclerViewAdapter
+import br.com.jonjts.myprofit.callback.BillListCallback
+import br.com.jonjts.myprofit.entity.Bill
+import kotlinx.android.synthetic.main.fragment_bill_list.*
 import kotlinx.android.synthetic.main.fragment_bill_list.view.*
 
 /**
@@ -13,13 +18,11 @@ import kotlinx.android.synthetic.main.fragment_bill_list.view.*
  * Activities containing this fragment MUST implement the
  * [BillsFragment.OnListFragmentInteractionListener] interface.
  */
-class BillsFragment : BaseFragment() {
+class BillsFragment : BaseFragment(), BillListCallback {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    var billList: RecyclerView? = null
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,14 +30,34 @@ class BillsFragment : BaseFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_bill_list, container, false)
 
-
-            with(view.list) {
-                layoutManager = LinearLayoutManager(context)
-                adapter = BillRecyclerViewAdapter(App.database?.billDao()!!.getAll())
-            }
-
         init(view)
+
         return view
+    }
+
+    override fun init(v: View) {
+        super.init(v)
+        billList = v.list
+
+        with(v.list) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = BillRecyclerViewAdapter(mutableListOf(), this@BillsFragment)
+        }
+
+        reload()
+    }
+
+    override fun reload() {
+        billList?.adapter = BillRecyclerViewAdapter(
+            App.database?.billDao()!!.getAll(),
+            this
+        )
+    }
+
+    override fun onBillClicked(bill: Bill) {
+        var it = Intent(activity, BillUpdateActivity::class.java)
+        it.extras.putLong("id", bill.id!!)
+        startActivityForResult(it, MainActivity.openBillActivity)
     }
 
     companion object {
