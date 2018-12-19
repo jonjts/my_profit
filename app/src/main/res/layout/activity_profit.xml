@@ -104,6 +104,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <Button
+                        android:onClick="onDateClicked"
                         android:backgroundTint="@color/colorPrimary"
                         android:layout_gravity="center"
                         android:text="22/12/2018"
@@ -111,6 +112,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/btn_dataregistro"/>
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:onClick="onSaveClicked"
                         android:layout_marginTop="50dp"
                         android:backgroundTint="@color/colorPrimary"
                         app:rippleColor="@color/colorPrimaryDark"

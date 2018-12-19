@@ -1,19 +1,29 @@
 package br.com.jonjts.myprofit
 
+import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.View
 import android.view.WindowManager
+import android.widget.DatePicker
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import br.com.jonjts.myprofit.entity.Bill
+import com.facebook.stetho.common.Util
 import kotlinx.android.synthetic.main.activity_profit.*
-import android.text.Editable
-import android.text.TextWatcher
 import java.text.NumberFormat
 import java.util.*
 
 
-class ProfitActivity : AppCompatActivity() {
+class ProfitActivity : AppCompatActivity(), OnDateSetListener {
+
+    val calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +39,94 @@ class ProfitActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         init()
+
+        updateDateButton()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun onDateClicked(v: View) {
+        var dialog = DatePickerDialog(
+            this,
+            AlertDialog.THEME_DEVICE_DEFAULT_LIGHT, this,
+            calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        dialog.show()
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        updateDate(year, month, dayOfMonth)
+    }
+
+    private fun updateDate(d: Date) {
+        calendar.time = d
+        updateDateButton()
+    }
+
+    private fun updateDate(year: Int, month: Int, dayOfMonth: Int) {
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month)
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        updateDateButton()
+    }
+
+    private fun updateDateButton(){
+        val convert = br.com.jonjts.myprofit.util.Util.convert(calendar.time)
+        btn_dataregistro.text = convert
+    }
+
+    fun onSaveClicked(v: View) {
+        if (isValid()) {
+            if (isNewItem()) {
+                insert()
+                Toast.makeText(this, "Adicionado", Toast.LENGTH_LONG).show()
+            }
+            finish()
+        }
+    }
+
+    private fun insert() {
+        App.database?.billDao()?.insert(bind())
+    }
+
+    private fun bind(): Bill {
+        val bill = Bill(null, txt_descricao.text.toString(),
+            convert(txt_saida.text.toString()),
+            convert(txt_entrada.text.toString()),
+            calendar.time)
+        return bill
+    }
+
+    private fun convert(value: String): Double {
+        if (!value.isNullOrBlank()) {
+            var replace = value
+            replace = replace.replace("R$", "")
+            replace = replace.replace(".", "")
+            replace = replace.replace(",", ".")
+            return replace.toDouble()
+        }
+        return .0
     }
 
 
-    fun init(){
+    private fun isNewItem(): Boolean {
+        return true
+    }
+
+    private fun isValid(): Boolean {
+        if (txt_descricao.text.isNullOrBlank()) {
+            txt_descricao.error = "Você precisa preencher este campo"
+            return false
+        }
+        return true
+    }
+
+
+    fun init() {
         applyMoneyMask()
     }
 
-    fun applyMoneyMask(){
+    fun applyMoneyMask() {
         txt_entrada.addTextChangedListener(object : TextWatcher {
             private var current = ""
 
@@ -65,7 +155,8 @@ class ProfitActivity : AppCompatActivity() {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int,
                 after: Int
-            ) {}
+            ) {
+            }
         })
 
         txt_saida.addTextChangedListener(object : TextWatcher {
@@ -96,7 +187,8 @@ class ProfitActivity : AppCompatActivity() {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int,
                 after: Int
-            ) {}
+            ) {
+            }
         })
     }
 

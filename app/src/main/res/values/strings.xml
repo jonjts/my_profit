@@ -2,22 +2,22 @@
     <string name="app_name">MyProfit</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
+    <string name="title_search">Pesqquisar</string>
     <string name="title_itens">Itens</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string-array name="months">
-        <item >January</item>
-        <item >February</item>
-        <item >March</item>
-        <item >April</item>
-        <item >May</item>
-        <item >June</item>
-        <item >July</item>
-        <item >August</item>
-        <item >September</item>
-        <item >October</item>
-        <item >November</item>
-        <item >December</item>
+        <item >Janeiro</item>
+        <item >Fevereiro</item>
+        <item >Março</item>
+        <item >Abril</item>
+        <item >Maio</item>
+        <item >Junho</item>
+        <item >Julho</item>
+        <item >Agosto</item>
+        <item >Setembro</item>
+        <item >Outubro</item>
+        <item >Novembro</item>
+        <item >Dezembro</item>
     </string-array>
     <string-array name="years">
         <item >2015</item>
