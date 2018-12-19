@@ -80,6 +80,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_entrada"
+                            android:drawableLeft="@drawable/ic_attach_money_primary_24dp"
                             android:textColor="@color/colorPrimary"
                             android:inputType="numberDecimal"
                             android:layout_width="match_parent"
@@ -96,6 +97,7 @@
                         android:hint="Saída">
 
                     <com.google.android.material.textfield.TextInputEditText
+                            android:drawableLeft="@drawable/ic_attach_money_primary_24dp"
                             android:id="@+id/txt_saida"
                             android:textColor="@color/colorPrimary"
                             android:inputType="numberDecimal"

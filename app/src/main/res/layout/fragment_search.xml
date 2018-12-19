@@ -12,7 +12,7 @@
             android:id="@+id/appbar_home"
             android:fitsSystemWindows="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" app:expanded="true">
+            android:layout_height="89dp" app:expanded="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
                 app:titleEnabled="true"
@@ -20,19 +20,38 @@
                 app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
                 android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
-                android:layout_height="428dp"
+                android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 app:layout_scrollFlags="exitUntilCollapsed|scroll|snap|enterAlways">
 
-
-            <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar_header"
-                    app:subtitleTextColor="@android:color/white"
-                    android:background="@color/colorPrimary"
+            <LinearLayout
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseParallaxMultiplier="0.9" app:layout_collapseMode="pin"
-                    android:visibility="visible"/>
+                    android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:layout_gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Pesquisar">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_search"
+                            android:textColorHint="@android:color/white"
+                            android:textSize="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
