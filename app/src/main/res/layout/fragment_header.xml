@@ -10,18 +10,20 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
                 app:titleEnabled="true"
+                android:id="@+id/collaps_toolbar"
                 app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
                 android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
-                app:layout_scrollFlags="exitUntilCollapsed|scroll|snap">
+                app:layout_scrollFlags="exitUntilCollapsed|scroll|snap|enterAlways">
 
 
             <LinearLayout
+                    android:layout_marginTop="4dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:gravity="center_vertical|center_horizontal">
+                    android:layout_height="180dp" android:gravity="center">
                 <Spinner
                         android:minWidth="30dp"
                         android:gravity="center"
@@ -38,8 +40,6 @@
             </LinearLayout>
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar_header"
-                    app:title="Dezembro"
-                    app:subtitle="2018"
                     app:subtitleTextColor="@android:color/white"
                     android:background="@color/colorPrimary"
                     android:layout_width="match_parent"

@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     fun selected(f: Fragment) {
         if (!f.isVisible) {
+            for (fragment in supportFragmentManager.fragments) {
+                supportFragmentManager.beginTransaction().remove(fragment).commit()
+            }
             val ft = fm.beginTransaction()
             ft.add(R.id.container, f)
             ft.commit()
@@ -38,11 +41,11 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search -> {
-                //message.setText(R.string.title_dashboard)
+                selected(fragments[1])
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_itens -> {
-                //message.setText(R.string.title_notifications)
+                selected(fragments[2])
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -69,6 +72,9 @@ class MainActivity : AppCompatActivity() {
 
     fun initFragmentsList() {
         fragments.add(HomeFragment.newInstance())
+        fragments.add(SearchFragment.newInstance())
+        fragments.add(BillsFragment.newInstance())
         selected(fragments[0])
+
     }
 }

@@ -1,16 +1,12 @@
 package br.com.jonjts.myprofit
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.activity_profit.*
-import kotlinx.android.synthetic.main.activity_profit.view.*
-import kotlinx.android.synthetic.main.fragment_header.view.*
-import java.util.*
+import androidx.fragment.app.Fragment
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,27 +17,23 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [HomeFragment.OnFragmentInteractionListener] interface
+ * [SearchFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [HomeFragment.newInstance] factory method to
+ * Use the [SearchFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class HomeFragment : BaseFragment() {
+class SearchFragment : Fragment() {
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val myView: View = inflater.inflate(R.layout.fragment_home, container,
-            false)
-        init(myView)
-
-        return myView
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
-
-
 
     companion object {
         /**
@@ -50,10 +42,10 @@ class HomeFragment : BaseFragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment SearchFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance() = HomeFragment()
+        fun newInstance() = SearchFragment()
     }
 }
