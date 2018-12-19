@@ -8,13 +8,21 @@ import java.util.*
 
 class Util {
 
-    private val BRAZIL = Locale("pt", "BR")
-    private val REAL = DecimalFormatSymbols(BRAZIL)
-    val DINHEIRO_REAL = DecimalFormat("¤ ###,###,##0.00", REAL)
 
     companion object {
+
+        private val BRAZIL = Locale("pt", "BR")
+        private val REAL = DecimalFormatSymbols(BRAZIL)
+        val DINHEIRO_REAL = DecimalFormat("¤ ###,###,##0.00", REAL)
+
+
         fun convert(date: Date): String {
             val dateInstance = SimpleDateFormat.getDateInstance()
+            return dateInstance.format(date)
+        }
+
+        fun convertsShort(date: Date): String {
+            val dateInstance = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT)
             return dateInstance.format(date)
         }
 

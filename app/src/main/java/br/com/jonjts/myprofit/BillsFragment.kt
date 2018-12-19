@@ -1,13 +1,11 @@
 package br.com.jonjts.myprofit
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.jonjts.myprofit.adapter.BillRecyclerViewAdapter
-
-import br.com.jonjts.myprofit.dummy.DummyContent
 import kotlinx.android.synthetic.main.fragment_bill_list.view.*
 
 /**
@@ -32,7 +30,7 @@ class BillsFragment : BaseFragment() {
 
             with(view.list) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = BillRecyclerViewAdapter(DummyContent.ITEMS)
+                adapter = BillRecyclerViewAdapter(App.database?.billDao()!!.getAll())
             }
 
         init(view)

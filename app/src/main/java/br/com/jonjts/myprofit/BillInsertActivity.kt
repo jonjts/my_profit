@@ -15,13 +15,12 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import br.com.jonjts.myprofit.entity.Bill
-import com.facebook.stetho.common.Util
 import kotlinx.android.synthetic.main.activity_profit.*
 import java.text.NumberFormat
 import java.util.*
 
 
-class ProfitActivity : AppCompatActivity(), OnDateSetListener {
+open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
 
     val calendar = Calendar.getInstance()
 
@@ -79,7 +78,7 @@ class ProfitActivity : AppCompatActivity(), OnDateSetListener {
         if (isValid()) {
             if (isNewItem()) {
                 insert()
-                Toast.makeText(this, "Adicionado", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getText(R.string.success_insert), Toast.LENGTH_LONG).show()
             }
             finish()
         }
@@ -115,7 +114,7 @@ class ProfitActivity : AppCompatActivity(), OnDateSetListener {
 
     private fun isValid(): Boolean {
         if (txt_descricao.text.isNullOrBlank()) {
-            txt_descricao.error = "Você precisa preencher este campo"
+            txt_descricao.error = getString(R.string.required_field)
             return false
         }
         return true

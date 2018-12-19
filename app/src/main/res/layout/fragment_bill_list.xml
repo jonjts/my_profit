@@ -15,20 +15,16 @@
 
 
         <androidx.core.widget.NestedScrollView
+                android:paddingTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fillViewport="true"
                 android:paddingRight="4dp"
                 android:paddingLeft="4dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        xmlns:tools="http://schemas.android.com/tools"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:id="@+id/list"
                         android:name="br.com.jonjts.myprofit.BillsFragment"
                         android:layout_width="match_parent"
@@ -38,9 +34,6 @@
                         app:layoutManager="LinearLayoutManager"
                         tools:context=".BillsFragment"
                         tools:listitem="@layout/fragment_bill"/>
-
-
-            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
         <include layout="@layout/fragment_header" android:layout_width="match_parent"
                  android:layout_height="wrap_content"/>

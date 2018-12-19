@@ -1,21 +1,15 @@
 package br.com.jonjts.myprofit
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import br.com.jonjts.myprofit.R.menu.navigation
-import kotlinx.android.synthetic.main.activity_main.*
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.bottom_sheet.*
 import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
-import android.os.Build
-
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -67,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onAddBillClicked(v: View){
-        startActivity(Intent(this, ProfitActivity::class.java))
+        startActivity(Intent(this, BillInsertActivity::class.java))
     }
 
     fun initFragmentsList() {

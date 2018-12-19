@@ -39,7 +39,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Pesquisar">
+                        android:hint="@string/title_search">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_search"

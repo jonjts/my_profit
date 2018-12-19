@@ -1,25 +1,108 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@android:color/white"
-              android:orientation="horizontal">
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
+    <!-- the circular icon on the left -->
     <TextView
-            android:text="asd"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/item_number"
+            android:id="@+id/lbl_dataregistro"
+            android:text="22/10/2019"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/text_margin"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:paddingTop="1dp"
+            />
 
-    <TextView
-            android:text="alksjdlakjs"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/content"
-            android:layout_width="match_parent"
+    <!-- the blue line -->
+    <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="15dp"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/text_margin"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+            android:padding="2dp"
+            android:orientation="vertical"
+            android:id="@+id/item_line">
+        <View
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:background="@drawable/ic_fiber_manual_record_black_24dp"/>
+        <View
+                android:layout_gravity="center"
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <!-- views at the right of the blue line -->
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingBottom="32dp"
+            android:clickable="true" >
+
+        <TextView
+                android:text="Roupas da Riachuello"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_title" android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="25sp"/>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:id="@+id/linear_entrada"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                <TextView
+                        android:paddingRight="4dp"
+                        android:text="@string/hint_entrada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <TextView
+                        android:text="R$ 300.00"
+                        android:textColor="@color/entrada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lbl_entrada"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/linear_saida"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                <TextView
+                        android:paddingRight="4dp"
+                        android:text="@string/hint_saida"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <TextView
+                        android:text="R$ 300.00"
+                        android:textColor="@color/saida"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lbl_saida"/>
+            </LinearLayout>
+            <TextView
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$300"
+                    android:id="@+id/lbl_lucro" />
+        </LinearLayout>
+
+        <!-- other views -->
+
+    </LinearLayout>
 </LinearLayout>

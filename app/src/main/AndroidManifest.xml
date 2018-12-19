@@ -25,10 +25,12 @@
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts"/>
 
-        <activity android:name=".ProfitActivity">
+        <activity android:name=".BillInsertActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".BillUpdateActivity">
         </activity>
     </application>
 

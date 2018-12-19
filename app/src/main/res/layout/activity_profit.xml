@@ -7,7 +7,7 @@
         android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ProfitActivity" android:orientation="vertical">
+        tools:context=".BillInsertActivity" android:orientation="vertical">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@android:color/white"
-                        android:hint="Nome/Descrição">
+                        android:hint="@string/hint_descricao">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_descricao"
@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/colorPrimary"
-                        android:hint="Entrada">
+                        android:hint="@string/hint_entrada">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_entrada"
@@ -94,7 +94,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/colorPrimary"
-                        android:hint="Saída">
+                        android:hint="@string/hint_saida">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:drawableLeft="@drawable/ic_attach_money_primary_24dp"
