@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.jonjts.myprofit.adapter.BillRecyclerViewAdapter
+import br.com.jonjts.myprofit.adapter.BillAdapter
 import br.com.jonjts.myprofit.callback.BillListCallback
 import br.com.jonjts.myprofit.entity.Bill
-import kotlinx.android.synthetic.main.fragment_bill_list.*
 import kotlinx.android.synthetic.main.fragment_bill_list.view.*
 
 /**
@@ -41,14 +40,14 @@ class BillsFragment : BaseFragment(), BillListCallback {
 
         with(v.list) {
             layoutManager = LinearLayoutManager(context)
-            adapter = BillRecyclerViewAdapter(mutableListOf(), this@BillsFragment)
+            adapter = BillAdapter(mutableListOf(), this@BillsFragment)
         }
 
         reload()
     }
 
     override fun reload() {
-        billList?.adapter = BillRecyclerViewAdapter(
+        billList?.adapter = BillAdapter(
             App.database?.billDao()!!.getAll(),
             this
         )
@@ -56,7 +55,9 @@ class BillsFragment : BaseFragment(), BillListCallback {
 
     override fun onBillClicked(bill: Bill) {
         var it = Intent(activity, BillUpdateActivity::class.java)
-        it.extras.putLong("id", bill.id!!)
+        val b = Bundle()
+        b.putLong("id", bill?.id!!)
+        it.putExtras(b)
         startActivityForResult(it, MainActivity.openBillActivity)
     }
 

@@ -11,14 +11,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.room.Database
 import br.com.jonjts.myprofit.callback.DatabaseCallback
+import br.com.jonjts.myprofit.entity.Bill
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     var fragments = mutableListOf<Fragment>()
     val fm = getSupportFragmentManager()
+
 
     companion object {
         val openBillActivity = 1891

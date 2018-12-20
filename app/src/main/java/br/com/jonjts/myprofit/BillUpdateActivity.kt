@@ -80,6 +80,10 @@ class BillUpdateActivity : BillInsertActivity() {
                 Toast.makeText(this, getText(R.string.success_remove), Toast.LENGTH_LONG).show()
                 finish()
             })
+        alert.setCancelable(true)
+        alert.setNegativeButton(getString(R.string.no),
+            DialogInterface.OnClickListener { dialog, which ->
+                dialog.cancel() })
         alert.create().show()
     }
 

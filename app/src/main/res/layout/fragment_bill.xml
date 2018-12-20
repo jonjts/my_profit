@@ -1,5 +1,7 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linear_bill_item"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -7,7 +9,6 @@
         android:focusable="true"
         android:background="@android:color/white">
 
-    <!-- the circular icon on the left -->
     <TextView
             android:textColor="@android:color/darker_gray"
             android:id="@+id/lbl_dataregistro"
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:paddingTop="1dp"
-            />
+    />
 
     <!-- the blue line -->
     <LinearLayout
@@ -38,7 +39,6 @@
 
     </LinearLayout>
 
-    <!-- views at the right of the blue line -->
     <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
@@ -46,7 +46,7 @@
             android:orientation="vertical"
             android:paddingLeft="24dp"
             android:paddingBottom="32dp"
-            android:clickable="true" >
+            android:clickable="true">
 
         <TextView
                 android:text="Roupas da Riachuello"
@@ -103,10 +103,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="R$300"
-                    android:id="@+id/lbl_lucro" />
+                    android:id="@+id/lbl_lucro"/>
         </LinearLayout>
 
         <!-- other views -->
 
     </LinearLayout>
+
 </LinearLayout>

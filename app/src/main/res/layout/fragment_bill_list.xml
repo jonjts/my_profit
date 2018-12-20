@@ -33,7 +33,8 @@
                         android:layout_marginRight="16dp"
                         app:layoutManager="LinearLayoutManager"
                         tools:context=".BillsFragment"
-                        tools:listitem="@layout/fragment_bill"/>
+                        tools:listitem="@layout/fragment_bill">
+                </androidx.recyclerview.widget.RecyclerView>
         </androidx.core.widget.NestedScrollView>
         <include layout="@layout/fragment_header" android:layout_width="match_parent"
                  android:layout_height="wrap_content"/>

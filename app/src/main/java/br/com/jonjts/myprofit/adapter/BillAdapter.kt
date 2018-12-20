@@ -20,16 +20,17 @@ import kotlinx.android.synthetic.main.fragment_bill.view.*
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
-class BillRecyclerViewAdapter(val mValues: List<Bill>,
-                              val callback: BillListCallback) :
-    RecyclerView.Adapter<BillRecyclerViewAdapter.ViewHolder>() {
+class BillAdapter(
+    val mValues: List<Bill>,
+    val callback: BillListCallback
+) :
+    RecyclerView.Adapter<BillAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
 
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as Bill
-            callback?.onBillClicked(item)
 
         }
     }
@@ -40,6 +41,7 @@ class BillRecyclerViewAdapter(val mValues: List<Bill>,
 
         return ViewHolder(view)
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
@@ -72,13 +74,13 @@ class BillRecyclerViewAdapter(val mValues: List<Bill>,
 
         with(holder.mView) {
             tag = item
-            setOnClickListener(mOnClickListener)
         }
     }
 
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+
         val mDescricao: TextView = mView.lbl_title
         val mDataRegistro: TextView = mView.lbl_dataregistro
         val mEntrada: TextView = mView.lbl_entrada
@@ -88,9 +90,6 @@ class BillRecyclerViewAdapter(val mValues: List<Bill>,
         val mPanelEntrada: LinearLayout = mView.linear_entrada
         val mPanelSaida: LinearLayout = mView.linear_saida
 
-        fun setOnClickListener(listener : View.OnClickListener){
-            mView.setOnClickListener(listener)
-        }
 
         override fun toString(): String {
             return super.toString() + " '" + mDataRegistro.text + "'"
