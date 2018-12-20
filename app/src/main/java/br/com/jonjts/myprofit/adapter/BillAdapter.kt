@@ -9,31 +9,16 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.jonjts.myprofit.R
-import br.com.jonjts.myprofit.callback.BillListCallback
-import br.com.jonjts.myprofit.dummy.DummyContent.DummyItem
 import br.com.jonjts.myprofit.entity.Bill
 import br.com.jonjts.myprofit.util.Util
 import kotlinx.android.synthetic.main.fragment_bill.view.*
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
+
 class BillAdapter(
-    val mValues: List<Bill>,
-    val callback: BillListCallback
+    val mValues: List<Bill>
 ) :
     RecyclerView.Adapter<BillAdapter.ViewHolder>() {
 
-    private val mOnClickListener: View.OnClickListener
-
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as Bill
-
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -76,6 +61,7 @@ class BillAdapter(
             tag = item
         }
     }
+
 
     override fun getItemCount(): Int = mValues.size
 

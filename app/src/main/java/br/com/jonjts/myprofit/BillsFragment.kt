@@ -1,13 +1,18 @@
 package br.com.jonjts.myprofit
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.jonjts.myprofit.adapter.BillAdapter
+import br.com.jonjts.myprofit.adapter.RecyclerItemClickListenr
 import br.com.jonjts.myprofit.callback.BillListCallback
 import br.com.jonjts.myprofit.entity.Bill
 import kotlinx.android.synthetic.main.fragment_bill_list.view.*
@@ -40,7 +45,21 @@ class BillsFragment : BaseFragment(), BillListCallback {
 
         with(v.list) {
             layoutManager = LinearLayoutManager(context)
-            adapter = BillAdapter(mutableListOf(), this@BillsFragment)
+            adapter = BillAdapter(mutableListOf())
+            itemAnimator = DefaultItemAnimator()
+            addOnItemTouchListener(
+                RecyclerItemClickListenr(context,
+                    this, object : RecyclerItemClickListenr.OnItemClickListener {
+
+                        override fun onItemClick(view: View, position: Int) {
+                            onBillClicked(view.tag as Bill)
+                        }
+
+                        override fun onItemLongClick(view: View?, position: Int) {
+
+                        }
+                    })
+            )
         }
 
         reload()
@@ -48,8 +67,7 @@ class BillsFragment : BaseFragment(), BillListCallback {
 
     override fun reload() {
         billList?.adapter = BillAdapter(
-            App.database?.billDao()!!.getAll(),
-            this
+            App.database?.billDao()!!.getAll()
         )
     }
 
@@ -59,6 +77,15 @@ class BillsFragment : BaseFragment(), BillListCallback {
         b.putLong("id", bill?.id!!)
         it.putExtras(b)
         startActivityForResult(it, MainActivity.openBillActivity)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == MainActivity.openBillActivity &&
+            resultCode == Activity.RESULT_OK
+        ) {
+            (activity as MainActivity).reloadFragments()
+        }
     }
 
     companion object {

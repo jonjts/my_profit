@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    private fun reloadFragments(){
+    fun reloadFragments(){
         for (f in fragments) (f as DatabaseCallback).onDataChange()
     }
 
