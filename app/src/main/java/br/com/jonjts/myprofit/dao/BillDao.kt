@@ -2,6 +2,7 @@ package br.com.jonjts.myprofit.dao
 
 import androidx.room.*
 import br.com.jonjts.myprofit.entity.Bill
+import java.util.*
 
 @Dao
 interface BillDao{
@@ -15,8 +16,11 @@ interface BillDao{
     @Delete
     fun delete(bill: Bill)
 
-    @Query("SELECT * FROM bill WHERE strftime('%m', data_registro) = :month AND strftime('%Y', data_registro) = :year ORDER BY data_registro")
-    fun consultByMonthYear(month: Int, year: Int) : List<Bill>
+    @Query("SELECT * FROM bill WHERE data_registro BETWEEN :begin AND :end ORDER BY data_registro")
+    fun consultByMonthYear(begin: Date, end: Date) : List<Bill>
+
+    @Query("SELECT * FROM bill WHERE nome LIKE :nome ORDER BY nome ASC, data_registro DESC LIMIT 30")
+    fun consultByNome(nome: String) : List<Bill>
 
 
     @Query("SELECT * FROM bill ")

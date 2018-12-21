@@ -8,6 +8,28 @@
         android:background="@android:color/white"
         tools:context=".SearchFragment">
 
+    <androidx.core.widget.NestedScrollView
+            android:paddingTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <androidx.recyclerview.widget.RecyclerView
+                android:layoutAnimation="@anim/layout_animation_fall_down"
+                android:id="@+id/list"
+                android:name="br.com.jonjts.myprofit.ItemFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:context=".ItemFragment"
+                tools:listitem="@layout/fragment_search_item"/>
+    </androidx.core.widget.NestedScrollView>
+
+
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_home"
             android:fitsSystemWindows="true"
@@ -55,7 +77,9 @@
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

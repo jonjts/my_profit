@@ -1,11 +1,11 @@
 package br.com.jonjts.myprofit
 
+import android.app.Activity
+import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.appcompat.view.CollapsibleActionView
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import br.com.jonjts.myprofit.callback.DatabaseCallback
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -28,6 +28,15 @@ open abstract class BaseFragment : Fragment(), DatabaseCallback{
     open abstract fun reload()
 
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == MainActivity.openBillActivity &&
+            resultCode == Activity.RESULT_OK
+        ) {
+            (activity as MainActivity).reloadFragments()
+        }
+    }
+
     open fun init(v: View){
         toolBar = v!!.collaps_toolbar
         initSpinners(v)
@@ -49,11 +58,20 @@ open abstract class BaseFragment : Fragment(), DatabaseCallback{
         spinnerAno = view.spinner_ano
         spinnerAno?.adapter = adapter_years
 
+        spinnerAno?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                reload()
+            }
+        }
         spinnerAno?.setSelection(currentYearPositionInSpinner())
     }
 
     fun getSelectedMes(): Int{
-        return spinnerMes!!.selectedItemPosition + 1
+        return spinnerMes!!.selectedItemPosition
     }
 
     fun getSelectedAno(): Int{
@@ -95,6 +113,7 @@ open abstract class BaseFragment : Fragment(), DatabaseCallback{
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 onMesSelected(spinner_mes)
+                reload()
             }
         }
         spinnerMes?.setSelection(calendar.get(Calendar.MONTH))
