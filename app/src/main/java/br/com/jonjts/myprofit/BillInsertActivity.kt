@@ -38,6 +38,7 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.title_new_profit)
 
         init()
 

@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical">
 
 
@@ -19,18 +20,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fillViewport="true"
-                android:paddingRight="4dp"
-                android:paddingLeft="4dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <androidx.recyclerview.widget.RecyclerView
+                        android:layoutAnimation="@anim/layout_animation_fall_down"
                         android:clickable="true"
                         android:focusable="true"
                         android:id="@+id/list"
                         android:name="br.com.jonjts.myprofit.BillsFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
                         app:layoutManager="LinearLayoutManager"
                         tools:context=".BillsFragment"
                         tools:listitem="@layout/fragment_bill">

@@ -1,6 +1,7 @@
 package br.com.jonjts.myprofit
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +15,7 @@ import br.com.jonjts.myprofit.callback.DatabaseCallback
 import br.com.jonjts.myprofit.entity.Bill
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profit.*
 
 
 class MainActivity : AppCompatActivity(){
@@ -70,7 +72,8 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun onAddBillClicked(v: View){
-        startActivityForResult(Intent(this, BillInsertActivity::class.java), openBillActivity)
+        startActivityForResult(Intent(this, BillInsertActivity::class.java),
+            openBillActivity)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

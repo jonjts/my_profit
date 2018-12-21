@@ -25,12 +25,14 @@
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts"/>
 
-        <activity android:name=".BillInsertActivity">
+        <activity android:name=".BillInsertActivity"
+                  android:windowSoftInputMode="adjustResize">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>
         </activity>
-        <activity android:name=".BillUpdateActivity">
+        <activity android:name=".BillUpdateActivity"
+                  android:windowSoftInputMode="adjustResize">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>

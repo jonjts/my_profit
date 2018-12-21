@@ -17,8 +17,8 @@
                 android:id="@+id/appbar_home"
                 android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
-                android:layout_height="172dp" app:expanded="false">
-
+                android:layout_height="172dp"
+                app:expanded="true">
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     app:title="Nova Receita"
@@ -28,42 +28,67 @@
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseParallaxMultiplier="0.9" app:layout_collapseMode="pin"
                     android:visibility="visible"/>
-            <LinearLayout
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                    app:titleEnabled="true"
+                    android:id="@+id/collaps_toolbar"
+                    app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_gravity="center"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    app:layout_scrollFlags="exitUntilCollapsed|scroll|snap|enterAlways">
+                <LinearLayout
+                        android:id="@+id/lnl_header"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:gravity="top"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@android:color/white"
-                        android:hint="@string/hint_descricao">
+                        android:layout_height="match_parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txt_descricao"
-                            android:textColorHint="@android:color/white"
-                            android:inputType="textMultiLine"
-                            android:keyboardNavigationCluster="false"
-                            android:textSize="29dp"
+                    <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:textColorHint="@android:color/white"
+                            android:hint="@string/hint_descricao">
 
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txt_descricao"
+                                android:textColorHint="@android:color/white"
+                                android:textSize="29dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:inputType="none"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
         </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                app:layout_anchor="@id/lnl_header"
+                app:layout_anchorGravity="end|bottom"
+                android:layout_marginRight="16dp"
+                android:onClick="onSaveClicked"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="@color/saida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:srcCompat="@drawable/ic_done_white_24dp"
+                android:id="@+id/btn_save"/>
 
 
         <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
-                android:paddingRight="4dp"
-                android:paddingLeft="4dp"
+                android:paddingTop="20dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <LinearLayout
                     android:padding="10dp"
@@ -115,17 +140,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/btn_dataregistro"/>
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:onClick="onSaveClicked"
-                        android:layout_marginTop="50dp"
-                        android:backgroundTint="@color/colorPrimary"
-                        app:rippleColor="@color/colorPrimaryDark"
-                        android:layout_gravity="end"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        app:srcCompat="@drawable/ic_done_white_24dp"
-                        android:id="@+id/btn_save"/>
 
 
             </LinearLayout>
