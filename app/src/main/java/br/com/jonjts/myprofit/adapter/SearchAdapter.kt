@@ -12,6 +12,8 @@ import br.com.jonjts.myprofit.entity.Bill
 import br.com.jonjts.myprofit.util.Util
 import kotlinx.android.synthetic.main.fragment_search_item.view.*
 
+
+
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
  * specified [OnListFragmentInteractionListener].
@@ -19,10 +21,20 @@ import kotlinx.android.synthetic.main.fragment_search_item.view.*
  */
 class SearchAdapter(
     private val mValues: List<Bill>,
-    private val mListener: SearchFragment.OnListFragmentInteractionListener?
+    private val mListener: SearchFragment.OnListFragmentInteractionListener?,
+    private val emptyView: View? = null,
+    private val recyclerView: RecyclerView? = null
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
+
+    private val observer = object : RecyclerView.AdapterDataObserver(){
+        override fun onChanged() {
+            super.onChanged()
+            initEmptyView()
+        }
+    }
+
 
     init {
         mOnClickListener = View.OnClickListener { v ->
@@ -31,6 +43,17 @@ class SearchAdapter(
             // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
         }
+        registerAdapterDataObserver(observer)
+        observer.onChanged()
+    }
+
+
+
+    private fun initEmptyView() {
+        if (emptyView != null && recyclerView != null) {
+            emptyView.visibility = if (mValues.isEmpty()) View.VISIBLE else View.GONE
+            recyclerView.visibility = if (emptyView.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,6 +61,7 @@ class SearchAdapter(
             .inflate(R.layout.fragment_search_item, parent, false)
         return ViewHolder(view)
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]

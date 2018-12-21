@@ -15,10 +15,30 @@ import kotlinx.android.synthetic.main.fragment_bill.view.*
 
 
 class BillAdapter(
-    val mValues: List<Bill>
-) :
-    RecyclerView.Adapter<BillAdapter.ViewHolder>() {
+    val mValues: List<Bill>,
+    private val emptyView: View? = null,
+    private val recyclerView: RecyclerView? = null
+) : RecyclerView.Adapter<BillAdapter.ViewHolder>() {
 
+
+    private val observer = object : RecyclerView.AdapterDataObserver() {
+        override fun onChanged() {
+            super.onChanged()
+            initEmptyView()
+        }
+    }
+
+    init {
+        registerAdapterDataObserver(observer)
+        observer.onChanged()
+    }
+
+    private fun initEmptyView() {
+        if (emptyView != null && recyclerView != null) {
+            emptyView.visibility = if (mValues.isEmpty()) View.VISIBLE else View.GONE
+            recyclerView.visibility = if (emptyView.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)

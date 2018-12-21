@@ -23,6 +23,7 @@ class BillsFragment : BaseFragment(), BillListCallback {
 
 
     var billList: RecyclerView? = null
+    var emptyView: View? = null
 
 
     override fun onCreateView(
@@ -31,6 +32,7 @@ class BillsFragment : BaseFragment(), BillListCallback {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_bill_list, container, false)
 
+        emptyView = view.lnl_empty
         init(view)
 
         return view
@@ -70,7 +72,7 @@ class BillsFragment : BaseFragment(), BillListCallback {
             Util.firstDate(month, year),
             Util.lastDate(month, year)
         )
-        billList?.adapter = BillAdapter(mValues)
+        billList?.adapter = BillAdapter(mValues, emptyView, billList)
     }
 
     override fun onBillClicked(bill: Bill) {

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.jonjts.myprofit.adapter.SearchAdapter
@@ -28,6 +29,7 @@ class SearchFragment : Fragment(), DatabaseCallback {
     private val listener: OnListFragmentInteractionListener
     var txtSearch: TextInputEditText? = null
     var list: RecyclerView? = null
+    var emptyView: View? = null
 
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -62,9 +64,12 @@ class SearchFragment : Fragment(), DatabaseCallback {
         val inflate = inflater.inflate(R.layout.fragment_search, container, false)
         list = inflate.list
         with(inflate.list) {
+            itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(context)
             adapter = SearchAdapter(mutableListOf(), listener)
         }
+
+        emptyView = inflate.lnl_empty
         initTextField(inflate)
         return inflate
     }
@@ -99,9 +104,10 @@ class SearchFragment : Fragment(), DatabaseCallback {
     private fun load() {
         var text = txtSearch?.text.toString()
         if (text.isNullOrBlank()) {
-            list!!.adapter = SearchAdapter(mutableListOf(), listener)
+            list!!.adapter = SearchAdapter(mutableListOf(), listener, emptyView, list)
         } else {
-            list!!.adapter = SearchAdapter(App.database?.billDao()!!.consultByNome("%" + text + "%"), listener)
+            list!!.adapter = SearchAdapter(App.database?.billDao()!!.consultByNome("%" + text + "%"),
+                listener, emptyView, list)
         }
     }
 

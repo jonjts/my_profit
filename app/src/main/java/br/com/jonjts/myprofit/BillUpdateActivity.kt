@@ -77,6 +77,7 @@ class BillUpdateActivity : BillInsertActivity() {
         alert.setPositiveButton(getString(R.string.yes),
             DialogInterface.OnClickListener { dialog, which ->
                 App.database?.billDao()?.delete(findBill())
+                setResult(Activity.RESULT_OK)
                 Toast.makeText(this, getText(R.string.success_remove), Toast.LENGTH_LONG).show()
                 finish()
             })
