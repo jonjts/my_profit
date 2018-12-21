@@ -19,7 +19,7 @@ interface BillDao{
     fun consultByMonthYear(month: Int, year: Int) : List<Bill>
 
 
-    @Query("SELECT * FROM bill")
+    @Query("SELECT * FROM bill ")
     fun getAll() : List<Bill>
 
     @Query("SELECT * FROM bill WHERE id = :id")
