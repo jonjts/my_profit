@@ -16,7 +16,7 @@ interface BillDao{
     @Delete
     fun delete(bill: Bill)
 
-    @Query("SELECT * FROM bill WHERE data_registro BETWEEN :begin AND :end ORDER BY data_registro")
+    @Query("SELECT * FROM bill WHERE data_registro BETWEEN :begin AND :end ORDER BY data_registro DESC")
     fun consultByMonthYear(begin: Date, end: Date) : List<Bill>
 
     @Query("SELECT * FROM bill WHERE nome LIKE :nome ORDER BY nome ASC, data_registro DESC LIMIT 30")
