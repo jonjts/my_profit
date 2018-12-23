@@ -4,12 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.com.jonjts.myprofit.callback.DatabaseCallback
 import kotlinx.android.synthetic.main.fragment_header.*
@@ -54,23 +52,19 @@ open abstract class BaseFragment : Fragment(), DatabaseCallback{
                 R.id.navigation_share -> {
                     share()
                 }
+                R.id.navigation_info -> {
+                    showInfo()
+                }
             }
             true
         }
     }
 
-    abstract fun share()
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
-            R.id.navigation_share -> {
-                Toast.makeText(context, "oii", Toast.LENGTH_LONG).show()
-                return super.onOptionsItemSelected(item)
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
+    fun showInfo(){
+        startActivity(Intent(activity, InfoActivity::class.java))
     }
+
+    abstract fun share()
 
 
 

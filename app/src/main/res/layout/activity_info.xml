@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:background="@android:color/white"
+                tools:context=".InfoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar_info"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="251dp"
+            android:layout_height="221dp"
+            android:gravity="center|center_horizontal" android:layout_centerVertical="true" android:layout_centerHorizontal="true">
+        <TextView
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/very_special_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/entrada_dark_extra"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="Thaisley Sayonara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/entrada_dark_extra" android:textSize="18sp" android:textStyle="bold"
+                android:id="@+id/lbl_thai"/>
+    </LinearLayout>
+    <TextView
+            android:paddingLeft="16dp"
+            android:text="@string/title_powerdby"
+            android:paddingRight="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true" android:id="@+id/textView15"
+            android:textColor="@android:color/darker_gray"/>
+    <TextView
+            android:text="\@jonjts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_toEndOf="@+id/textView15"
+            android:layout_alignParentBottom="true" android:id="@+id/lbl_me"
+            android:textColor="@android:color/darker_gray"/>
+
+</RelativeLayout>
