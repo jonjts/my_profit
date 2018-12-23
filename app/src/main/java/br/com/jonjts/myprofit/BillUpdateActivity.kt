@@ -1,7 +1,6 @@
 package br.com.jonjts.myprofit
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -73,16 +72,16 @@ class BillUpdateActivity : BillInsertActivity() {
         var alert = AlertDialog.Builder(this)
         alert.setMessage(getString(R.string.are_you_sure))
         alert.setTitle(R.string.title_delete)
-        alert.setPositiveButton(getString(R.string.yes),
-            DialogInterface.OnClickListener { dialog, which ->
-                App.database?.billDao()?.delete(findBill())
-                setResult(Activity.RESULT_OK, Intent("DELETE"))
-                finish()
-            })
+        alert.setPositiveButton(getString(R.string.yes)
+        ) { dialog, which ->
+            App.database?.billDao()?.delete(findBill())
+            setResult(Activity.RESULT_OK, Intent("DELETE"))
+            finish()
+        }
         alert.setCancelable(true)
-        alert.setNegativeButton(getString(R.string.no),
-            DialogInterface.OnClickListener { dialog, which ->
-                dialog.cancel() })
+        alert.setNegativeButton(getString(R.string.no)
+        ) { dialog, which ->
+            dialog.cancel() }
         alert.create().show()
     }
 

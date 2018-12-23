@@ -19,6 +19,9 @@ import kotlinx.android.synthetic.main.fragment_bill_list.*
  * [BillsFragment.OnListFragmentInteractionListener] interface.
  */
 class BillsFragment : BaseFragment(), BillListCallback {
+    override fun share() {
+
+    }
 
 
     override fun onCreateView(
@@ -81,8 +84,10 @@ class BillsFragment : BaseFragment(), BillListCallback {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         var action = if (data != null) data.action else null
-        (activity as MainActivity).onActivityResult(requestCode,
-            resultCode, action)
+        (activity as MainActivity).onActivityResult(
+            requestCode,
+            resultCode, action
+        )
     }
 
     companion object {

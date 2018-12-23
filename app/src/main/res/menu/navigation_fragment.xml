@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+            android:id="@+id/navigation_share"
+            android:icon="@drawable/ic_share_white_24dp"
+            android:title="@string/title_share" app:showAsAction="never" android:visible="false"/>
+    <item
+            android:id="@+id/navigation_info"
+            android:icon="@drawable/ic_info_white_24dp"
+            android:title="@string/title_info" app:showAsAction="never"/>
+
+
+</menu>

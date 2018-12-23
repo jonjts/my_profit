@@ -1,13 +1,18 @@
 package br.com.jonjts.myprofit
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import br.com.jonjts.myprofit.callback.DatabaseCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -55,6 +60,38 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+    fun giveMePermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            // Se não tiver permissão, peça
+            var alert = AlertDialog.Builder(this)
+            alert.setMessage(getString(R.string.text_permission))
+            alert.setTitle(R.string.title_permission)
+            alert.setPositiveButton(
+                getString(R.string.yes)
+            ) { dialog, which ->
+                ActivityCompat.requestPermissions(
+                    this,
+                    mutableListOf(Manifest.permission.WRITE_EXTERNAL_STORAGE).toTypedArray(),
+                    19
+                )
+            }
+            alert.setCancelable(true)
+            alert.setNegativeButton(
+                getString(R.string.no)
+            ) { dialog, which ->
+                dialog.cancel()
+            }
+            alert.create().show()
+
+        }
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +104,8 @@ class MainActivity : AppCompatActivity() {
             val decorView = window.decorView
             decorView.systemUiVisibility = FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS or SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         }
+
+        giveMePermission()
     }
 
     fun onAddBillClicked(v: View) {

@@ -1,7 +1,11 @@
 package br.com.jonjts.myprofit
 
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +15,9 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import kotlinx.android.synthetic.main.fragment_header.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.io.File
 
 
 /**
@@ -37,6 +43,8 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        setHasOptionsMenu(true)
+
         return inflater.inflate(
             R.layout.fragment_home, container,
             false
@@ -51,6 +59,32 @@ class HomeFragment : BaseFragment() {
     override fun initComponents() {
         super.initComponents()
         initChart()
+    }
+
+    override fun initToolbar() {
+        super.initToolbar()
+        toolbar_header.menu.findItem(R.id.navigation_share).isVisible = true
+    }
+
+
+    override fun share() {
+        val fileName = "chart_" + System.currentTimeMillis()
+        val subPath = "MyProfit/image"
+        if (chart.saveToGallery(
+                fileName, subPath, "myProfit_chart",
+                Bitmap.CompressFormat.PNG, 70
+            )
+        ) {
+            val extBaseDir = Environment.getExternalStorageDirectory()
+            val file = File(extBaseDir.absolutePath + "/DCIM/" + subPath).path +
+                    "/$fileName.png"
+
+            val share = Intent(Intent.ACTION_SEND)
+            share.type = "image/png"
+
+            share.putExtra(Intent.EXTRA_STREAM, Uri.parse(file))
+            startActivity(Intent.createChooser(share, getString(R.string.title_share)))
+        }
     }
 
     fun initChart() {
@@ -86,9 +120,9 @@ class HomeFragment : BaseFragment() {
         updateLabels(sumEntrada, sumSaida, sumLucro)
 
         val entries = mutableListOf<PieEntry>()
-        entries.add(PieEntry(sumEntrada.toFloat(), ""))
-        entries.add(PieEntry(sumSaida.toFloat(), ""))
-        entries.add(PieEntry(sumLucro.toFloat(), ""))
+        entries.add(PieEntry(sumEntrada.toFloat(), getString(R.string.hint_entrada)))
+        entries.add(PieEntry(sumSaida.toFloat(), getString(R.string.hint_saida)))
+        entries.add(PieEntry(sumLucro.toFloat(), getString(R.string.hint_profit)))
 
         val dataSet = PieDataSet(entries, "Total")
 
@@ -101,7 +135,7 @@ class HomeFragment : BaseFragment() {
         val pieData = PieData()
         pieData.dataSet = dataSet
         pieData.setValueTextColor(Color.WHITE)
-        pieData.setValueTextSize(20f)
+        pieData.setValueTextSize(18f)
 
         chart.data = pieData
         pieData.setValueFormatter(PercentFormatter())

@@ -53,13 +53,23 @@
 
     <string name="title_salvar">Save</string>
     <string name="title_delete">Remove</string>
-
-    <string name="hint_descricao">Name/Description</string>
     <string name="title_update">Update</string>
     <string name="title_new_profit">New</string>
+    <string name="title_share">Share</string>
+    <string name="title_info">Info</string>
+    <string name="title_permission">Permission</string>
+
+    <string name="hint_descricao">Name/Description</string>
     <string name="hint_entrada">Input</string>
     <string name="hint_saida">Output</string>
+    <string name="hint_profit">Profit</string>
+
+    <string name="text_permission">Hi,
+    I need to save images in your phone to share when you want.
+    Can your give me you permission?</string>
+
     <string name="nothing_show">Nothing to show</string>
+
     <string name="total_entrada">Total input</string>
     <string name="total_saida">Total output</string>
     <string name="total_lucro">Total profit</string>

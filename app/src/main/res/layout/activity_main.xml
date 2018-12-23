@@ -28,9 +28,7 @@
                 android:id="@+id/btn_open_bill"
                 app:layout_anchorGravity="top|end"
                 android:layout_gravity="end|bottom"
-                android:background="@android:color/white"
                 android:layout_marginBottom="16dp"
-                android:tint="@android:color/white"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 app:srcCompat="@drawable/ic_add_white"
@@ -39,7 +37,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="onAddBillClicked"
-                app:backgroundTint="@color/colorAccent"/>
+                app:backgroundTint="@color/saida"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
