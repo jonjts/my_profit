@@ -4,19 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.activity_profit.*
-import kotlinx.android.synthetic.main.activity_profit.view.*
-import kotlinx.android.synthetic.main.fragment_header.view.*
-import java.util.*
+import br.com.jonjts.myprofit.util.Util
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import kotlinx.android.synthetic.main.fragment_home.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -29,9 +22,11 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : BaseFragment() {
 
-
     override fun reload() {
-
+        if (!isAdded) {
+            return
+        }
+        load()
     }
 
     override fun onCreateView(
@@ -39,14 +34,56 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val myView: View = inflater.inflate(R.layout.fragment_home, container,
-            false)
-        init(myView)
+        val myView: View = inflater.inflate(
+            R.layout.fragment_home, container,
+            false
+        )
 
         return myView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initComponents()
+    }
 
+    override fun initComponents() {
+        super.initComponents()
+        load()
+    }
+
+    fun updateLabels(entrada: Double, saida: Double, lucro: Double) {
+        lbl_total_entrada.text = Util.DINHEIRO_REAL.format(entrada)
+        lbl_total_saida.text = Util.DINHEIRO_REAL.format(saida)
+        lbl_total_lucro.text = Util.DINHEIRO_REAL.format(lucro)
+    }
+
+
+    fun load() {
+        var sumEntrada = App.database?.billDao()!!.sumEntrada(
+            Util.firstDate(getSelectedMes(), getSelectedAno()),
+            Util.lastDate(getSelectedMes(), getSelectedAno())
+        )
+        var sumSaida = App.database?.billDao()!!.sumSaida(
+            Util.firstDate(getSelectedMes(), getSelectedAno()),
+            Util.lastDate(getSelectedMes(), getSelectedAno())
+        )
+        var sumLucro = sumEntrada - sumSaida
+
+        updateLabels(sumEntrada, sumSaida, sumLucro)
+
+        val entries = mutableListOf<PieEntry>()
+        entries.add(PieEntry(sumEntrada.toFloat(), getString(R.string.total_entrada)))
+        entries.add(PieEntry(sumSaida.toFloat(), getString(R.string.total_saida)))
+        entries.add(PieEntry(sumLucro.toFloat(), getString(R.string.total_lucro)))
+
+        val dataSet = PieDataSet(entries, "Total")
+
+        val pieData = PieData()
+        pieData.dataSet = dataSet
+
+
+    }
 
     companion object {
         /**

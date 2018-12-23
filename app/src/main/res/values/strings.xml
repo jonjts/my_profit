@@ -60,4 +60,7 @@
     <string name="hint_entrada">Input</string>
     <string name="hint_saida">Output</string>
     <string name="nothing_show">Nothing to show</string>
+    <string name="total_entrada">Total input</string>
+    <string name="total_saida">Total output</string>
+    <string name="total_lucro">Total profit</string>
 </resources>

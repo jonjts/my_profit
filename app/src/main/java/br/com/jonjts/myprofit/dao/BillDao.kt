@@ -5,7 +5,7 @@ import br.com.jonjts.myprofit.entity.Bill
 import java.util.*
 
 @Dao
-interface BillDao{
+interface BillDao {
 
     @Insert
     fun insert(vararg bill: Bill)
@@ -17,15 +17,20 @@ interface BillDao{
     fun delete(bill: Bill)
 
     @Query("SELECT * FROM bill WHERE data_registro BETWEEN :begin AND :end ORDER BY data_registro DESC")
-    fun consultByMonthYear(begin: Date, end: Date) : List<Bill>
+    fun consultByMonthYear(begin: Date, end: Date): List<Bill>
+
+    @Query("SELECT sum(entrada) FROM bill WHERE data_registro BETWEEN :begin AND :end ORDER BY data_registro DESC")
+    fun sumEntrada(begin: Date, end: Date): Double
+
+    @Query("SELECT sum(saida) FROM bill WHERE data_registro BETWEEN :begin AND :end ORDER BY data_registro DESC")
+    fun sumSaida(begin: Date, end: Date): Double
 
     @Query("SELECT * FROM bill WHERE nome LIKE :nome ORDER BY nome ASC, data_registro DESC LIMIT 30")
-    fun consultByNome(nome: String) : List<Bill>
-
+    fun consultByNome(nome: String): List<Bill>
 
     @Query("SELECT * FROM bill ")
-    fun getAll() : List<Bill>
+    fun getAll(): List<Bill>
 
     @Query("SELECT * FROM bill WHERE id = :id")
-    fun find(id: Long) : Bill
+    fun find(id: Long): Bill
 }

@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import br.com.jonjts.myprofit.adapter.BillAdapter
 import br.com.jonjts.myprofit.adapter.RecyclerItemClickListenr
 import br.com.jonjts.myprofit.callback.BillListCallback
 import br.com.jonjts.myprofit.entity.Bill
 import br.com.jonjts.myprofit.util.Util
-import kotlinx.android.synthetic.main.fragment_bill_list.view.*
+import kotlinx.android.synthetic.main.fragment_bill_list.*
 
 /**
  * A fragment representing a list of Items.
@@ -22,27 +21,22 @@ import kotlinx.android.synthetic.main.fragment_bill_list.view.*
 class BillsFragment : BaseFragment(), BillListCallback {
 
 
-    var billList: RecyclerView? = null
-    var emptyView: View? = null
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_bill_list, container, false)
-
-        emptyView = view.lnl_empty
-        init(view)
-
-        return view
+        return inflater.inflate(R.layout.fragment_bill_list, container, false)
     }
 
-    override fun init(v: View) {
-        super.init(v)
-        billList = v.list
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initComponents()
+    }
 
-        with(v.list) {
+    override fun initComponents() {
+        super.initComponents()
+
+        with(list) {
             layoutManager = LinearLayoutManager(context)
             addOnItemTouchListener(
                 RecyclerItemClickListenr(context,
@@ -72,7 +66,7 @@ class BillsFragment : BaseFragment(), BillListCallback {
             Util.firstDate(month, year),
             Util.lastDate(month, year)
         )
-        billList?.adapter = BillAdapter(mValues, emptyView, billList)
+        list.adapter = BillAdapter(mValues, lnl_empty, list)
     }
 
     override fun onBillClicked(bill: Bill) {
@@ -86,10 +80,6 @@ class BillsFragment : BaseFragment(), BillListCallback {
 
     companion object {
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance() = BillsFragment()
     }

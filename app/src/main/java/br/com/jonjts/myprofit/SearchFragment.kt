@@ -11,25 +11,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import br.com.jonjts.myprofit.adapter.SearchAdapter
 import br.com.jonjts.myprofit.callback.DatabaseCallback
 import br.com.jonjts.myprofit.entity.Bill
-import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class SearchFragment : Fragment(), DatabaseCallback {
 
     private val listener: OnListFragmentInteractionListener
-    var txtSearch: TextInputEditText? = null
-    var list: RecyclerView? = null
-    var emptyView: View? = null
 
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -62,21 +53,24 @@ class SearchFragment : Fragment(), DatabaseCallback {
         savedInstanceState: Bundle?
     ): View? {
         val inflate = inflater.inflate(R.layout.fragment_search, container, false)
-        list = inflate.list
         with(inflate.list) {
             itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(context)
             adapter = SearchAdapter(mutableListOf(), listener)
         }
 
-        emptyView = inflate.lnl_empty
-        initTextField(inflate)
         return inflate
     }
 
-    fun initTextField(v: View) {
-        txtSearch = v.txt_search
-        txtSearch?.addTextChangedListener(object : TextWatcher {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initTextField()
+
+    }
+
+    fun initTextField() {
+        txt_search.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 load()
             }
@@ -102,12 +96,14 @@ class SearchFragment : Fragment(), DatabaseCallback {
 
 
     private fun load() {
-        var text = txtSearch?.text.toString()
+        var text = txt_search.text.toString()
         if (text.isNullOrBlank()) {
-            list!!.adapter = SearchAdapter(mutableListOf(), listener, emptyView, list)
+            list!!.adapter = SearchAdapter(mutableListOf(), listener, lnl_empty, list)
         } else {
-            list!!.adapter = SearchAdapter(App.database?.billDao()!!.consultByNome("%" + text + "%"),
-                listener, emptyView, list)
+            list!!.adapter = SearchAdapter(
+                App.database?.billDao()!!.consultByNome("%" + text + "%"),
+                listener, lnl_empty, list
+            )
         }
     }
 

@@ -24,6 +24,10 @@ android {
     }
 }
 
+repositories{
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
 
     def room_version = "2.1.0-alpha03"
@@ -45,6 +49,8 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // graphic
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

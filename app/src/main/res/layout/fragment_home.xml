@@ -22,14 +22,134 @@
                 android:paddingLeft="4dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <LinearLayout
+                    android:paddingTop="16dp"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                <LinearLayout
+
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="30dp"
+                            android:orientation="horizontal">
+
+                        <ImageView
+                                android:layout_width="19dp"
+                                android:layout_height="match_parent"
+                                android:id="@+id/imageView3"
+                                android:background="@drawable/entrada_circle"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="5dp"/>
+                        <Space
+                                android:layout_width="8dp"
+                                android:layout_height="match_parent"/>
+
+                        <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                                android:text="@string/total_entrada"
+                                android:textColor="@android:color/darker_gray"
+                        />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:textColor="@color/entrada"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                                android:text="R$400,00"
+                                android:id="@+id/lbl_total_entrada"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="30dp"
+                            android:orientation="horizontal">
+
+                        <ImageView
+                                android:layout_width="19dp"
+                                android:layout_height="match_parent"
+                                android:id="@+id/imageView4"
+                                android:background="@drawable/saida_circle"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="5dp"/>
+
+                        <Space
+                                android:layout_width="8dp"
+                                android:layout_height="match_parent"/>
+
+                        <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                                android:text="@string/total_saida" android:textColor="@android:color/darker_gray"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                                android:textColor="@color/saida"
+                                android:text="R$200,00"
+                                android:id="@+id/lbl_total_saida"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="30dp"
+                            android:orientation="horizontal">
+
+                        <ImageView
+                                android:layout_width="19dp"
+                                android:layout_height="match_parent"
+                                android:id="@+id/imageView5"
+                                android:background="@drawable/lucro_circle"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="5dp"/>
+                        <Space
+                                android:layout_width="8dp"
+                                android:layout_height="match_parent"/>
+
+                        <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                                android:text="@string/total_lucro"
+                                android:id="@+id/textView13" android:textColor="@android:color/darker_gray"/>
+
+                        <TextView
+                                android:textColor="@color/lucro"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                                android:text="R$200,00"
+                                android:id="@+id/lbl_total_lucro"/>
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.PieChart
+                            android:layout_marginTop="16dp"
+                            android:id="@+id/chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <include layout="@layout/fragment_header" android:layout_width="match_parent"
+        <include layout="@layout/fragment_header"
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
