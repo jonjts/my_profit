@@ -64,9 +64,9 @@
     <string name="hint_saida">Output</string>
     <string name="hint_profit">Profit</string>
 
-    <string name="text_permission">Hi,
-    I need to save images in your phone to share when you want.
-    Can your give me you permission?</string>
+    <string name="text_permission">Hi\n
+        I need to save images in your phone to share when you want.\n
+        Can you give me your permission?</string>
 
     <string name="nothing_show">Nothing to show</string>
 
