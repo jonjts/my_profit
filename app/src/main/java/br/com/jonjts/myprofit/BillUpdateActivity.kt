@@ -2,11 +2,11 @@ package br.com.jonjts.myprofit
 
 import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import br.com.jonjts.myprofit.entity.Bill
 import br.com.jonjts.myprofit.util.Util
@@ -43,7 +43,6 @@ class BillUpdateActivity : BillInsertActivity() {
         if (isValid()) {
             update()
             setResult(Activity.RESULT_OK)
-            Toast.makeText(this, getText(R.string.success_update), Toast.LENGTH_LONG).show()
             finish()
         }
     }
@@ -77,8 +76,7 @@ class BillUpdateActivity : BillInsertActivity() {
         alert.setPositiveButton(getString(R.string.yes),
             DialogInterface.OnClickListener { dialog, which ->
                 App.database?.billDao()?.delete(findBill())
-                setResult(Activity.RESULT_OK)
-                Toast.makeText(this, getText(R.string.success_remove), Toast.LENGTH_LONG).show()
+                setResult(Activity.RESULT_OK, Intent("DELETE"))
                 finish()
             })
         alert.setCancelable(true)

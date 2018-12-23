@@ -1,7 +1,6 @@
 package br.com.jonjts.myprofit
 
 import android.app.Activity
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,22 +9,21 @@ import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.room.Database
 import br.com.jonjts.myprofit.callback.DatabaseCallback
-import br.com.jonjts.myprofit.entity.Bill
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_profit.*
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     var fragments = mutableListOf<Fragment>()
     val fm = getSupportFragmentManager()
 
 
     companion object {
-        val openBillActivity = 1891
+        val newBillActivity = 1891
+        val editBillActivity = 2891
     }
 
     fun selected(f: Fragment) {
@@ -71,19 +69,42 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    fun onAddBillClicked(v: View){
-        startActivityForResult(Intent(this, BillInsertActivity::class.java),
-            openBillActivity)
+    fun onAddBillClicked(v: View) {
+        startActivityForResult(
+            Intent(this, BillInsertActivity::class.java),
+            newBillActivity
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == openBillActivity && resultCode == Activity.RESULT_OK){
+        onActivityResult(requestCode, resultCode)
+    }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: String? = null) {
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                MainActivity.editBillActivity -> {
+                    var message =
+                        if (data.isNullOrBlank()) getString(R.string.success_update) else getString(R.string.success_remove)
+                    Snackbar.make(
+                        btn_open_bill, message, Snackbar.LENGTH_LONG
+                    ).show()
+                }
+                MainActivity.newBillActivity -> {
+                    val make = Snackbar.make(
+                        btn_open_bill,
+                        getString(R.string.success_insert), Snackbar.LENGTH_LONG
+                    )
+                    make.show()
+
+                }
+            }
             reloadFragments()
         }
     }
 
-    fun reloadFragments(){
+    fun reloadFragments() {
         for (f in fragments) (f as DatabaseCallback).onDataChange()
     }
 

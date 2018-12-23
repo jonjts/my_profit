@@ -1,6 +1,5 @@
 package br.com.jonjts.myprofit
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -43,7 +42,7 @@ class SearchFragment : Fragment(), DatabaseCallback {
                 val b = Bundle()
                 b.putLong("id", item?.id!!)
                 it.putExtras(b)
-                startActivityForResult(it, MainActivity.openBillActivity)
+                startActivityForResult(it, MainActivity.editBillActivity)
             }
         }
     }
@@ -55,7 +54,7 @@ class SearchFragment : Fragment(), DatabaseCallback {
         val inflate = inflater.inflate(R.layout.fragment_search, container, false)
         with(inflate.list) {
             itemAnimator = DefaultItemAnimator()
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(activity)
             adapter = SearchAdapter(mutableListOf(), listener)
         }
 
@@ -87,11 +86,9 @@ class SearchFragment : Fragment(), DatabaseCallback {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == MainActivity.openBillActivity &&
-            resultCode == Activity.RESULT_OK
-        ) {
-            (activity as MainActivity).reloadFragments()
-        }
+        var action = if (data != null) data.action else null
+        (activity as MainActivity).onActivityResult(requestCode,
+            resultCode, action)
     }
 
 

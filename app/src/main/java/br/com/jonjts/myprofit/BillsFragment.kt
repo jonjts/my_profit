@@ -74,9 +74,16 @@ class BillsFragment : BaseFragment(), BillListCallback {
         val b = Bundle()
         b.putLong("id", bill?.id!!)
         it.putExtras(b)
-        startActivityForResult(it, MainActivity.openBillActivity)
+        startActivityForResult(it, MainActivity.editBillActivity)
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        var action = if (data != null) data.action else null
+        (activity as MainActivity).onActivityResult(requestCode,
+            resultCode, action)
+    }
 
     companion object {
 

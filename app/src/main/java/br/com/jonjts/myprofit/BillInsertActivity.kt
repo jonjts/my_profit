@@ -8,15 +8,12 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Menu
 import android.view.View
 import android.view.WindowManager
 import android.widget.DatePicker
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import br.com.jonjts.myprofit.entity.Bill
-import com.facebook.stetho.common.Util
 import kotlinx.android.synthetic.main.activity_profit.*
 import java.text.NumberFormat
 import java.util.*
@@ -81,7 +78,6 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
         if (isValid()) {
             insert()
             setResult(Activity.RESULT_OK)
-            Toast.makeText(this, getText(R.string.success_insert), Toast.LENGTH_LONG).show()
             finish()
         }
     }
@@ -106,6 +102,7 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
             replace = replace.replace("R$", "")
             replace = replace.replace(".", "")
             replace = replace.replace(",", ".")
+            replace = replace.trim()
             return replace.toDouble()
         }
         return .0
@@ -138,7 +135,7 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
 
                     val cleanString = s.toString().replace("[R$,.]".toRegex(), "")
 
-                    val parsed = java.lang.Double.parseDouble(cleanString)
+                    val parsed = java.lang.Double.parseDouble(cleanString.trim())
                     val formated = NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(parsed / 100)
 
                     current = formated
@@ -170,7 +167,7 @@ open class BillInsertActivity : AppCompatActivity(), OnDateSetListener {
 
                     val cleanString = s.toString().replace("[R$,.]".toRegex(), "")
 
-                    val parsed = java.lang.Double.parseDouble(cleanString)
+                    val parsed = java.lang.Double.parseDouble(cleanString.trim())
                     val formated = NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(parsed / 100)
 
                     current = formated

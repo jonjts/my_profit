@@ -1,13 +1,16 @@
 package br.com.jonjts.myprofit
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import br.com.jonjts.myprofit.util.Util
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -34,12 +37,10 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val myView: View = inflater.inflate(
+        return inflater.inflate(
             R.layout.fragment_home, container,
             false
         )
-
-        return myView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +50,15 @@ class HomeFragment : BaseFragment() {
 
     override fun initComponents() {
         super.initComponents()
-        load()
+        initChart()
+    }
+
+    fun initChart() {
+        chart.description.isEnabled = false
+        chart.setExtraOffsets(5f, 10f, 5f, 5f)
+        chart.dragDecelerationFrictionCoef = .95f
+        chart.setUsePercentValues(true)
+        chart.legend.isEnabled = false
     }
 
     fun updateLabels(entrada: Double, saida: Double, lucro: Double) {
@@ -60,29 +69,50 @@ class HomeFragment : BaseFragment() {
 
 
     fun load() {
+        val month = getSelectedMes()
+        val year = getSelectedAno()
         var sumEntrada = App.database?.billDao()!!.sumEntrada(
-            Util.firstDate(getSelectedMes(), getSelectedAno()),
-            Util.lastDate(getSelectedMes(), getSelectedAno())
+            Util.firstDate(month, year),
+            Util.lastDate(month, year)
         )
+
         var sumSaida = App.database?.billDao()!!.sumSaida(
-            Util.firstDate(getSelectedMes(), getSelectedAno()),
-            Util.lastDate(getSelectedMes(), getSelectedAno())
+            Util.firstDate(month, year),
+            Util.lastDate(month, year)
         )
+
         var sumLucro = sumEntrada - sumSaida
 
         updateLabels(sumEntrada, sumSaida, sumLucro)
 
         val entries = mutableListOf<PieEntry>()
-        entries.add(PieEntry(sumEntrada.toFloat(), getString(R.string.total_entrada)))
-        entries.add(PieEntry(sumSaida.toFloat(), getString(R.string.total_saida)))
-        entries.add(PieEntry(sumLucro.toFloat(), getString(R.string.total_lucro)))
+        entries.add(PieEntry(sumEntrada.toFloat(), ""))
+        entries.add(PieEntry(sumSaida.toFloat(), ""))
+        entries.add(PieEntry(sumLucro.toFloat(), ""))
 
         val dataSet = PieDataSet(entries, "Total")
 
+        var colors = mutableListOf<Int>()
+        colors.add(getColor(R.color.entrada))
+        colors.add(getColor(R.color.saida))
+        colors.add(getColor(R.color.lucro))
+        dataSet.colors = colors
+
         val pieData = PieData()
         pieData.dataSet = dataSet
+        pieData.setValueTextColor(Color.WHITE)
+        pieData.setValueTextSize(20f)
 
+        chart.data = pieData
+        pieData.setValueFormatter(PercentFormatter())
+        chart.animateXY(500, 500)
+        chart.highlightValues(null)
 
+        chart.invalidate()
+    }
+
+    fun getColor(color: Int): Int {
+        return ContextCompat.getColor(activity!!, color)
     }
 
     companion object {

@@ -25,7 +25,7 @@ open abstract class BaseFragment : Fragment(), DatabaseCallback{
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == MainActivity.openBillActivity &&
+        if (requestCode == MainActivity.newBillActivity &&
             resultCode == Activity.RESULT_OK
         ) {
             (activity as MainActivity).reloadFragments()
