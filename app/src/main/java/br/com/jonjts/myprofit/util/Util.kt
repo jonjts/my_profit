@@ -1,5 +1,7 @@
 package br.com.jonjts.myprofit.util
 
+import android.os.Environment
+import java.io.File
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.SimpleDateFormat
@@ -10,13 +12,17 @@ class Util {
 
 
     companion object {
+        val OLD_BACKUP =
+            Environment.getExternalStorageDirectory().getAbsolutePath() +
+                    File.separator + "MyProfit" + File.separator + "backup" +
+                    File.separator + File.separator + "myprofit.db"
 
         private val BRAZIL = Locale("pt", "BR")
         private val REAL = DecimalFormatSymbols(BRAZIL)
         val DINHEIRO_REAL = DecimalFormat("¤ ###,###,##0.00", REAL)
 
         //Retorna o primeiro dia do mês
-        fun firstDate(month: Int, year: Int) : Date{
+        fun firstDate(month: Int, year: Int): Date {
             var c = Calendar.getInstance()
             c.set(Calendar.YEAR, year)
             c.set(Calendar.MONTH, month)
@@ -25,7 +31,7 @@ class Util {
         }
 
         //Retorna a data com o ultimo dia do mes
-        fun lastDate(month: Int, year: Int) : Date{
+        fun lastDate(month: Int, year: Int): Date {
             var c = Calendar.getInstance()
             c.set(Calendar.YEAR, year)
             c.set(Calendar.MONTH, month)

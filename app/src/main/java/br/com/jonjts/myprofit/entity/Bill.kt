@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity
 data class Bill(
-    @PrimaryKey var id: Long?,
+    @PrimaryKey var id: Long? = null,
     @NonNull @ColumnInfo var nome: String,
     @ColumnInfo var saida: Double,
     @ColumnInfo var entrada: Double,
